@@ -1,6 +1,7 @@
 #include <Servo.h>
 
 Servo xServo, yServo;
+//xServo - for base
 
 int ldrTLpin = A1; // top-left LDR
 int ldrTRpin = A2; // top-right LDR
@@ -23,6 +24,10 @@ xServo.attach(xServoPin);
 yServo.attach(yServoPin);
 pinMode(xServoPin, OUTPUT);
 pinMode(yServoPin, OUTPUT);
+
+//initial positions
+xServo.write(90);
+yServo.write(90);
 }
 
 void loop() {
@@ -42,20 +47,26 @@ int avgright = (TRval + BRval)/2;
 int avgleft = (TLval + BLval)/2;
 
 //calculating difference values
-int difx = avgtop - avgbot;
-int dify = avgright - avgleft;
+int dify = avgtop - avgbot;
+int difx = avgright - avgleft;
 
 
 //setting up X-axis
 if (abs(difx)>=threshold){
-  if (difx>0){rotate_servo(xServo, +1);}
-  else{rotate_servo(xServo, -1);}
+  if(yServo.read()<=90){
+    if (difx>0){rotate_servo(xServo, -1);}
+    else{rotate_servo(xServo, +1);}
+  }
+  else{
+    if (difx>0){rotate_servo(xServo, +1);}
+      else{rotate_servo(xServo, -1);}
+  }
 }
 
 //setting up Y-axis
 if (abs(dify)>=threshold){
-  if (dify>0){rotate_servo(yServo, +1);}
-  else{rotate_servo(yServo, -1);}
+  if (dify>0){rotate_servo(yServo, -1);}
+  else{rotate_servo(yServo, +1);}
 }
 delay(100);
 }
