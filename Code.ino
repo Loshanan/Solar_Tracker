@@ -13,7 +13,7 @@ int TLval, TRval, BLval, BRval; //values readed from ldr sensors
 int xServoPin = 5; // X-axis servo motor pin
 int yServoPin = 6; // y axis servo motor pin
 
-int threshold=10; //threshold value of changing the position of the tracker
+int threshold=100; //threshold value of changing the position of the tracker
 int degree=2; //minimum degree that servo changes for an observation
 int oldval; //rading value from servo motor
 
