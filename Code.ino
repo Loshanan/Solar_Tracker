@@ -13,7 +13,7 @@ int TLval, TRval, BLval, BRval; //values readed from ldr sensors
 int xServoPin = 5; // X-axis servo motor pin
 int yServoPin = 6; // y axis servo motor pin
 
-int threshold=100; //threshold value of changing the position of the tracker
+int threshold=50; //threshold value of changing the position of the tracker
 int degree=2; //minimum degree that servo changes for an observation
 int oldval; //rading value from servo motor
 
@@ -54,21 +54,21 @@ int difx = avgright - avgleft;
 //setting up X-axis
 if (abs(difx)>=threshold){
   if(yServo.read()<=90){
-    if (difx>0){rotate_servo(xServo, -1);}
-    else{rotate_servo(xServo, +1);}
+    if (difx>0){rotate_servo(xServo, +1);}
+    else{rotate_servo(xServo, -1);}
   }
   else{
-    if (difx>0){rotate_servo(xServo, +1);}
-      else{rotate_servo(xServo, -1);}
+    if (difx>0){rotate_servo(xServo, -1);}
+      else{rotate_servo(xServo, +1);}
   }
 }
 
 //setting up Y-axis
 if (abs(dify)>=threshold){
-  if (dify>0){rotate_servo(yServo, -1);}
-  else{rotate_servo(yServo, +1);}
+  if (dify>0){rotate_servo(yServo, +1);}
+  else{rotate_servo(yServo, -1);}
 }
-delay(100);
+delay(50);
 }
 
 
